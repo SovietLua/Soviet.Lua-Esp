@@ -1,7 +1,7 @@
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
 
-local BoxSettings = {
+local getgenv().BoxSettings = {
     Color = Color3.new(1, 0, 0),
     Thickness = 2,
     Transparency = 1
