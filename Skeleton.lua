@@ -2,7 +2,7 @@ local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
 local UserInputService = game:GetService("UserInputService")
 
-local getgenv().SkeletonSettings = {
+getgenv().SkeletonSettings = {
     Color = Color3.new(0, 1, 0),
     Thickness = 2,
     Transparency = 1
@@ -11,7 +11,7 @@ local getgenv().SkeletonSettings = {
 local player = Players.LocalPlayer
 local camera = workspace.CurrentCamera
 local skeletons = {}
-local getgenv().SkeleVisible = true
+getgenv().SkeletonEspEnabled = true
 
 local function createLine()
     local line = Drawing.new("Line")
@@ -115,7 +115,7 @@ local function trackPlayer(plr)
 
                     line.From = Vector2.new(posA.X, posA.Y)
                     line.To = Vector2.new(posB.X, posB.Y)
-                    line.Visible = skeletonVisible
+                    line.Visible = getgenv().SkeletonEspEnabled
                 else
                     line.Visible = false
                 end
@@ -144,7 +144,7 @@ local function untrackPlayer(plr)
 end
 
 local function toggleSkeletons()
-    skeletonVisible = not skeletonVisible
+    getgenv().SkeletonEspEnabled = not getgenv().SkeletonEspEnabled
 end
 
 for _, plr in ipairs(Players:GetPlayers()) do
