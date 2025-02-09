@@ -2,7 +2,7 @@ local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
 local UserInputService = game:GetService("UserInputService")
 
-local SkeletonSettings = {
+local getgenv().SkeletonSettings = {
     Color = Color3.new(0, 1, 0),
     Thickness = 2,
     Transparency = 1
