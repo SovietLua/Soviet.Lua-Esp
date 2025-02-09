@@ -11,7 +11,7 @@ local getgenv().SkeletonSettings = {
 local player = Players.LocalPlayer
 local camera = workspace.CurrentCamera
 local skeletons = {}
-local SkeleVisible = true
+local getgenv().SkeleVisible = true
 
 local function createLine()
     local line = Drawing.new("Line")
