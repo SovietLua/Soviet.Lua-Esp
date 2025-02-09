@@ -11,7 +11,7 @@ local SkeletonSettings = {
 local player = Players.LocalPlayer
 local camera = workspace.CurrentCamera
 local skeletons = {}
-local SkeleVisible = true  -- This variable controls the visibility of the skeletons
+local SkeleVisible = true
 
 local function createLine()
     local line = Drawing.new("Line")
@@ -115,7 +115,7 @@ local function trackPlayer(plr)
 
                     line.From = Vector2.new(posA.X, posA.Y)
                     line.To = Vector2.new(posB.X, posB.Y)
-                    line.Visible = skeletonVisible  -- Visibility based on the toggle
+                    line.Visible = skeletonVisible
                 else
                     line.Visible = false
                 end
@@ -143,19 +143,9 @@ local function untrackPlayer(plr)
     end
 end
 
--- Toggle function to change the visibility state
 local function toggleSkeletons()
     skeletonVisible = not skeletonVisible
 end
-
--- Detect when the player presses the "F" key to toggle visibility
-UserInputService.InputBegan:Connect(function(input, gameProcessedEvent)
-    if not gameProcessedEvent then
-        if input.UserInputType == Enum.UserInputType.Keyboard and input.KeyCode == Enum.KeyCode.F then
-            toggleSkeletons()
-        end
-    end
-end)
 
 for _, plr in ipairs(Players:GetPlayers()) do
     if plr ~= player then
