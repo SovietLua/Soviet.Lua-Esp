@@ -70,7 +70,7 @@ local function updateBox(box, character)
             local startIdx, endIdx = edge[1], edge[2]
             local line = box[i]
 
-            if (BoxSettings.TeamColor) then
+            if (not BoxSettings.TeamColor) then
                 line.Color = BoxSettings.Color
             else
                 line.Color = plr.TeamColor
