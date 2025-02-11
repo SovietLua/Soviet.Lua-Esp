@@ -4,6 +4,7 @@ local UserInputService = game:GetService("UserInputService")
 
 getgenv().SkeletonSettings = {
     Color = Color3.new(0, 1, 0),
+    TeamColor = false,
     Thickness = 2,
     Transparency = 1
 }
@@ -103,7 +104,12 @@ local function trackPlayer(plr)
                 local line = skeleton[index] or createLine()
                 skeleton[index] = line
 
-                line.Color = SkeletonSettings.Color
+                if (SkeletonSettings.TeamColor) then
+                    line.Color = SkeletonSettings.Color
+                else
+                    line.Color = plr.TeamColor
+                end
+
                 line.Thickness = SkeletonSettings.Thickness
                 line.Transparency = SkeletonSettings.Transparency
 
