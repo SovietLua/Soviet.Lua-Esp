@@ -3,6 +3,7 @@ local RunService = game:GetService("RunService")
 
 getgenv().BoxSettings = {
     Color = Color3.new(1, 0, 0),
+    TeamColor = false,
     Thickness = 2,
     Transparency = 1
 }
@@ -68,7 +69,13 @@ local function updateBox(box, character)
         for i, edge in ipairs(edges) do
             local startIdx, endIdx = edge[1], edge[2]
             local line = box[i]
-            line.Color = BoxSettings.Color
+
+            if (BoxSettings.TeamColor) then
+                line.Color = BoxSettings.Color
+            else
+                line.Color = plr.TeamColor
+            end
+
             line.Thickness = BoxSettings.Thickness
             line.Transparency = BoxSettings.Transparency
             line.From = points[startIdx]
