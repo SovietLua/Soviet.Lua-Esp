@@ -104,7 +104,7 @@ local function trackPlayer(plr)
                 local line = skeleton[index] or createLine()
                 skeleton[index] = line
 
-                if (SkeletonSettings.TeamColor) then
+                if (not SkeletonSettings.TeamColor) then
                     line.Color = SkeletonSettings.Color
                 else
                     line.Color = plr.TeamColor
