@@ -22,7 +22,7 @@ local function createBox()
     return box
 end
 
-local function updateBox(box, character)
+local function updateBox(box, character, targetPlayer)
     if not getgenv().TwoDBoxesEnabled then
         for _, line in ipairs(box) do
             line.Visible = false
@@ -70,10 +70,10 @@ local function updateBox(box, character)
             local startIdx, endIdx = edge[1], edge[2]
             local line = box[i]
 
-            if (not BoxSettings.TeamColor) then
+            if not BoxSettings.TeamColor then
                 line.Color = BoxSettings.Color
             else
-                line.Color = plr.TeamColor
+                line.Color = targetPlayer.TeamColor.Color
             end
 
             line.Thickness = BoxSettings.Thickness
@@ -95,46 +95,46 @@ local function removeBox(box)
     end
 end
 
-local function trackPlayer(player)
+local function trackPlayer(targetPlayer)
     local function onCharacterAdded(character)
         local box = createBox()
-        boxes[player] = box
+        boxes[targetPlayer] = box
 
         local humanoid = character:WaitForChild("Humanoid")
         
         humanoid.Died:Connect(function()
-            if boxes[player] then
-                removeBox(boxes[player])
-                boxes[player] = nil
+            if boxes[targetPlayer] then
+                removeBox(boxes[targetPlayer])
+                boxes[targetPlayer] = nil
             end
         end)
 
         RunService.RenderStepped:Connect(function()
-            if player and player.Character == character then
-                updateBox(box, character)
+            if targetPlayer and targetPlayer.Character == character then
+                updateBox(box, character, targetPlayer)
             end
         end)
     end
 
     local function onCharacterRemoving()
-        if boxes[player] then
-            removeBox(boxes[player])
-            boxes[player] = nil
+        if boxes[targetPlayer] then
+            removeBox(boxes[targetPlayer])
+            boxes[targetPlayer] = nil
         end
     end
 
-    player.CharacterAdded:Connect(onCharacterAdded)
-    player.CharacterRemoving:Connect(onCharacterRemoving)
+    targetPlayer.CharacterAdded:Connect(onCharacterAdded)
+    targetPlayer.CharacterRemoving:Connect(onCharacterRemoving)
 
-    if player.Character then
-        onCharacterAdded(player.Character)
+    if targetPlayer.Character then
+        onCharacterAdded(targetPlayer.Character)
     end
 end
 
-local function untrackPlayer(player)
-    if boxes[player] then
-        removeBox(boxes[player])
-        boxes[player] = nil
+local function untrackPlayer(targetPlayer)
+    if boxes[targetPlayer] then
+        removeBox(boxes[targetPlayer])
+        boxes[targetPlayer] = nil
     end
 end
 
