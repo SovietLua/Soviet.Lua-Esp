@@ -3,11 +3,11 @@ local RunService = game:GetService("RunService")
 local UserInputService = game:GetService("UserInputService")
 
 getgenv().SkeletonSettings = {
-    Enabled = true,
     Color = Color3.new(0, 1, 0),
     TeamColor = false,
     Thickness = 2,
-    Transparency = 1
+    Transparency = 1,
+    Enabled = true
 }
 
 local player = Players.LocalPlayer
@@ -38,8 +38,6 @@ local function trackPlayer(plr)
 
         local character = plr.Character
         local humanoid = character:FindFirstChild("Humanoid")
-
-        local joints = {}
 
         if humanoid and humanoid.RigType == Enum.HumanoidRigType.R15 then
             joints = {
