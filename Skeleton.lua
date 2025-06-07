@@ -3,6 +3,7 @@ local RunService = game:GetService("RunService")
 local UserInputService = game:GetService("UserInputService")
 
 getgenv().SkeletonSettings = {
+    Enabled = true,
     Color = Color3.new(0, 1, 0),
     TeamColor = false,
     Thickness = 2,
@@ -12,7 +13,6 @@ getgenv().SkeletonSettings = {
 local player = Players.LocalPlayer
 local camera = workspace.CurrentCamera
 local skeletons = {}
-getgenv().SkeletonEspEnabled = true
 
 local function createLine()
     local line = Drawing.new("Line")
@@ -38,6 +38,8 @@ local function trackPlayer(plr)
 
         local character = plr.Character
         local humanoid = character:FindFirstChild("Humanoid")
+
+        local joints = {}
 
         if humanoid and humanoid.RigType == Enum.HumanoidRigType.R15 then
             joints = {
@@ -121,7 +123,7 @@ local function trackPlayer(plr)
 
                     line.From = Vector2.new(posA.X, posA.Y)
                     line.To = Vector2.new(posB.X, posB.Y)
-                    line.Visible = getgenv().SkeletonEspEnabled
+                    line.Visible = SkeletonSettings.Enabled
                 else
                     line.Visible = false
                 end
@@ -150,7 +152,7 @@ local function untrackPlayer(plr)
 end
 
 local function toggleSkeletons()
-    getgenv().SkeletonEspEnabled = not getgenv().SkeletonEspEnabled
+    SkeletonSettings.Enabled = not SkeletonSettings.Enabled
 end
 
 for _, plr in ipairs(Players:GetPlayers()) do
